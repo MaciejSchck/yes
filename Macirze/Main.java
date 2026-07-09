@@ -1,76 +1,40 @@
-public class Macirz {
+import java.util.Scanner;
 
-    private int macirzLength;
-    private int macirzWidth;
-    private int[][] defaultMacirz;
+public class Main {
+    public static void main(String[] args) {
+        Macirz macirz = new Macirz();
 
-    public void setMacirzLength(int userLengthInput){
-        this.macirzLength = userLengthInput;
+        macirz.setMacirzLength(fetchUserLengthInput());
+        macirz.setMacirzWidth(fetchUserWidthInput());
+        macirz.createMacirz();
+        macirz.executeUserOperationChoice(fetchUserOperationChoice());
     }
-    public void setMacirzWidth(int userWidthInput){
-        this.macirzWidth = userWidthInput;
+
+    public static int fetchUserLengthInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How many rows u want?");
+        return scanner.nextInt();
     }
-    public void createMacirz(){
+
+    public static int fetchUserWidthInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How many columns u want?");
+        return scanner.nextInt();
+    }
+
+    public static int fetchUserOperationChoice() {
+        Scanner scanner = new Scanner(System.in);
+        int response;
         System.out.println();
-        System.out.println("Heres yo new macirz:");
-        this.defaultMacirz = new int[macirzLength][macirzWidth];
-        for(int i=0; i<macirzLength; i++){
-            System.out.println();
-            for(int j=0; j<macirzWidth; j++){
-                defaultMacirz[i][j] = (int) (Math.random()*5)+1;
-                System.out.print(defaultMacirz[i][j]+" ");
-            }
+        System.out.println("Whacha finna do with it?" + "\n" + "Yo options are:" + "\n" + "1 - invert diagonally to the right" + "\n" + "2 - invert diagonally to the left" + "\n" + "3 - invert horizontally" + "\n" + "4 - invert vertically");
+        response = scanner.nextInt();
+        if (response == 1 || response == 2 || response == 3 || response == 4) {
+            return response;
         }
-        System.out.println();
-    }
-    public void invertDiagonallyRight(){
-        for(int i=0; i<macirzLength; i++){
+        else {
             System.out.println();
-            for(int j=0; j<macirzWidth; j++){
-                System.out.print(defaultMacirz[j][i]+" ");
-            }
-        }
-    }
-    public void invertDiagonallyLeft(){
-        for(int i=macirzLength-1; i>=0; i--){
-            System.out.println();
-            for(int j=macirzWidth-1; j>=0; j--){
-                System.out.print(defaultMacirz[i][j]+" ");
-            }
-        }
-    }
-    public void invertHorizontally(){
-        for(int i=macirzLength-1; i>=0; i--){
-            System.out.println();
-            for(int j=0; j<macirzWidth; j++){
-                System.out.print(defaultMacirz[i][j]+" ");
-            }
-        }
-    }
-    public void invertVertically(){
-        for(int i=0; i<macirzLength; i++){
-            System.out.println();
-            for(int j=macirzWidth-1; j>=0; j--){
-                System.out.print(defaultMacirz[i][j]+" ");
-            }
-        }
-    }
-    public void executeUserOperationChoice(int response) {
-        System.out.println();
-        System.out.println("Heres your inverted macirz:");
-        switch (response) {
-            case 1:
-                invertDiagonallyRight();
-                break;
-            case 2:
-                invertDiagonallyLeft();
-                break;
-            case 3:
-                invertHorizontally();
-                break;
-            case 4:
-                invertVertically();
-                break;
+            System.out.println("U blind? Choose a number between 1 and 4.");
+            return fetchUserOperationChoice();
         }
     }
 }
